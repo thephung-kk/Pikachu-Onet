@@ -9,7 +9,7 @@ public class GridSystem : MonoBehaviour
     private int totalTiles;
 
     [SerializeField]
-    private float cellSize = 1f;
+    private float cellSize = 0.8f;
 
     [SerializeField]
     private int numberOfSprites = 10;
@@ -20,6 +20,9 @@ public class GridSystem : MonoBehaviour
 
     [SerializeField]
     private Sprite[] tileSprites;
+
+    [SerializeField]
+    private GridManager gridManager; // Reference to the click handler
 
     private void Start()
     {
@@ -122,7 +125,7 @@ public class GridSystem : MonoBehaviour
                     tile.transform.localScale = new Vector3(scaleX, scaleY, 1f);
                 }
                 Tile tileScript = tile.GetComponent<Tile>();
-                tileScript.SetSprite(spritePairs[spriteIndex]);
+                tileScript.Init(spritePairs[spriteIndex], new Vector2Int(x, y), gridManager);
                 spriteIndex++;
             }
         }
