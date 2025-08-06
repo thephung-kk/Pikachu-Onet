@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellSize: 0.8
-  numberOfSprites: 20
+  numberOfSprites: 10
   tilePrefab: {fileID: 5665396371471788960, guid: be713b8ee9b12df4c8054e5cf5ae4ff3, type: 3}
   tileSprites: []
   gridManager: {fileID: 2043353288}

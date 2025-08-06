@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GridSystem : MonoBehaviour
 {
-    private int width = 16;
-    private int height = 9;
+    private int width = 18;
+    private int height = 11;
     private int totalTiles;
 
     [SerializeField]
@@ -27,7 +27,7 @@ public class GridSystem : MonoBehaviour
 
     private void Start()
     {
-        totalTiles = width * height;
+        totalTiles = (width - 2) * (height - 2);
         CalculateOriginPosition();
         CreateGrid();
     }
@@ -50,7 +50,6 @@ public class GridSystem : MonoBehaviour
         // Grid must have an even number of tiles to form pairs
         if (totalTiles % 2 != 0)
         {
-            Debug.LogError("Total number of tiles must be even!");
             return;
         }
 
@@ -59,7 +58,6 @@ public class GridSystem : MonoBehaviour
         // Check if we have any sprites at all
         if (allSprites.Length == 0)
         {
-            Debug.LogError("No sprites found in Resources/Sprites/Tiles!");
             return;
         }
 
@@ -104,11 +102,19 @@ public class GridSystem : MonoBehaviour
             0f
         );
 
-        // Instantiate and assign sprites to tiles
-        int spriteIndex = 0;
+        // Clear grid
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
+            {
+                grid[x, y] = null;
+            }
+        }
+        // Instantiate and assign sprites to tiles
+        int spriteIndex = 0;
+        for (int x = 1; x < width - 1; x++)
+        {
+            for (int y = 1; y < height - 1; y++)
             {
                 Vector3 spawnPos = new Vector3(
                     origin.x + x * cellSize,

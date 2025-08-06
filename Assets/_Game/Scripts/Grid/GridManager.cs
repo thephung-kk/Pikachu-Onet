@@ -10,6 +10,8 @@ public class GridManager : MonoBehaviour
 
     public void OnTileClicked(Tile clickedTile)
     {
+        Debug.Log($"Tile clicked at position: ({clickedTile.GridPosition.x}, {clickedTile.GridPosition.y})");
+        
         if (firstSelected == null)
         {
             firstSelected = clickedTile;
@@ -31,7 +33,6 @@ public class GridManager : MonoBehaviour
                 secondSelected.Hide();
                 firstSelected = null;
                 secondSelected = null;
-                Debug.Log("Tiles matched!");
             }
             else
             {
@@ -39,7 +40,6 @@ public class GridManager : MonoBehaviour
                 secondSelected.SetHighlight(true);
                 firstSelected = secondSelected;
                 secondSelected = null;
-                Debug.Log("Tiles cannot be matched!");
             }
         }
     }

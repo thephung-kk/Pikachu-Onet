@@ -34,18 +34,9 @@ public class Tile : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log(
-            $"Tile clicked at position: {GridPosition}, Sprite: {tileSprite?.name ?? "null"}"
-        );
-
         if (gridManager != null)
         {
-            Debug.Log($"Notifying GridManager about tile click at {GridPosition}");
             gridManager.OnTileClicked(this);
-        }
-        else
-        {
-            Debug.LogWarning($"Tile at {GridPosition} has no GridManager reference!");
         }
     }
 
