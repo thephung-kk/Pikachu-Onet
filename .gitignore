@@ -1,0 +1,45 @@
+# ========== Unity Generated Files ==========
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+
+# ========== Visual Studio / JetBrains Rider ==========
+.vs/
+*.csproj
+*.sln
+*.user
+*.unityproj
+*.suo
+*.tmp
+*.userprefs
+
+# ========== OS Files ==========
+.DS_Store
+Thumbs.db
+
+# ========== Crash Reports / Analytics ==========
+*.stacktrace
+*.dmp
+
+# ========== Unity Package Manager ==========
+Packages/packages-lock.json
+
+# ========== Others ==========
+*.apk
+*.aab
+*.unitypackage
+*.log
+*.pidb
+*.mdb
+
+# ========== Rider project files ==========
+.idea/
+
+# ========== Optional ==========
+# Uncomment nếu không muốn đẩy file build cấu hình
+# ProjectSettings/
+# Packages/manifest.json
