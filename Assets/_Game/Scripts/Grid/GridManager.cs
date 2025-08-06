@@ -6,6 +6,7 @@ public class GridManager : MonoBehaviour
 {
     private Tile firstSelected;
     private Tile secondSelected;
+    public Tile[,] grid;
 
     public void OnTileClicked(Tile clickedTile)
     {
@@ -24,12 +25,13 @@ public class GridManager : MonoBehaviour
             secondSelected = clickedTile;
             secondSelected.SetHighlight(true);
 
-            if (CanMatch(firstSelected, secondSelected))
+            if (PathFinder.CanConnect(grid, firstSelected, secondSelected))
             {
                 firstSelected.Hide();
                 secondSelected.Hide();
                 firstSelected = null;
                 secondSelected = null;
+                Debug.Log("Tiles matched!");
             }
             else
             {
@@ -37,12 +39,8 @@ public class GridManager : MonoBehaviour
                 secondSelected.SetHighlight(true);
                 firstSelected = secondSelected;
                 secondSelected = null;
+                Debug.Log("Tiles cannot be matched!");
             }
         }
-    }
-
-    private bool CanMatch(Tile a, Tile b)
-    {
-        return a.GetSprite() == b.GetSprite();
     }
 }

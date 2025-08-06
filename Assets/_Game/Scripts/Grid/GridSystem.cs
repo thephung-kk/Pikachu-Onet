@@ -22,7 +22,8 @@ public class GridSystem : MonoBehaviour
     private Sprite[] tileSprites;
 
     [SerializeField]
-    private GridManager gridManager; // Reference to the click handler
+    public GridManager gridManager; // Reference to the click handler
+    public Tile[,] grid;
 
     private void Start()
     {
@@ -44,6 +45,7 @@ public class GridSystem : MonoBehaviour
     {
         // Load all sprites from Resources folder
         Sprite[] allSprites = Resources.LoadAll<Sprite>("Sprites/Tiles");
+        grid = new Tile[width, height];
 
         // Grid must have an even number of tiles to form pairs
         if (totalTiles % 2 != 0)
@@ -115,6 +117,7 @@ public class GridSystem : MonoBehaviour
                 );
 
                 GameObject tile = Instantiate(tilePrefab, spawnPos, Quaternion.identity, transform);
+                grid[x, y] = tile.GetComponent<Tile>();
                 // Adjust tile scale to match cell size
                 SpriteRenderer sr = tile.GetComponent<SpriteRenderer>();
                 if (sr != null)
@@ -129,5 +132,6 @@ public class GridSystem : MonoBehaviour
                 spriteIndex++;
             }
         }
+        gridManager.grid = grid;
     }
 }
