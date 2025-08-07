@@ -10,8 +10,6 @@ public class GridManager : MonoBehaviour
 
     public void OnTileClicked(Tile clickedTile)
     {
-        Debug.Log($"Tile clicked at position: ({clickedTile.GridPosition.x}, {clickedTile.GridPosition.y})");
-        
         if (firstSelected == null)
         {
             firstSelected = clickedTile;
@@ -41,6 +39,25 @@ public class GridManager : MonoBehaviour
                 firstSelected = secondSelected;
                 secondSelected = null;
             }
+        }
+    }
+
+    public void ShuffleGrid()
+    {
+        PathFindingUtils.ShuffleTiles(grid);
+        firstSelected = null;
+        secondSelected = null;
+    }
+
+    public void HintValidMove()
+    {
+        if (PathFindingUtils.HasAnyValidMove(grid))
+        {
+            (firstSelected, secondSelected) = PathFindingUtils.GetRandomValidMove(grid);
+            firstSelected.SetHighlight(true);
+            secondSelected.SetHighlight(true);
+            firstSelected = null;
+            secondSelected = null;
         }
     }
 }

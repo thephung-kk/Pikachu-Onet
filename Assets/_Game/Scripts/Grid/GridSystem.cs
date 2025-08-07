@@ -32,6 +32,14 @@ public class GridSystem : MonoBehaviour
         CreateGrid();
     }
 
+    private void Update()
+    {
+        if (!PathFindingUtils.HasAnyValidMove(grid))
+        {
+            PathFindingUtils.ShuffleTiles(grid);
+        }
+    }
+
     private void CalculateOriginPosition()
     {
         originPosition = new Vector3(

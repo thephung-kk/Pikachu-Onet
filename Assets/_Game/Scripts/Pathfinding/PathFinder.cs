@@ -47,10 +47,6 @@ public static class PathFinder
                         {
                             return true;
                         }
-                        else if (isZShape(grid, firstTile.GridPosition, secondTile.GridPosition))
-                        {
-                            return true;
-                        }
                         else
                         {
                             return false;
@@ -69,10 +65,6 @@ public static class PathFinder
                     {
                         // There is a tile between the two tiles
                         if (isUShape(grid, firstTile.GridPosition, secondTile.GridPosition))
-                        {
-                            return true;
-                        }
-                        else if (isZShape(grid, firstTile.GridPosition, secondTile.GridPosition))
                         {
                             return true;
                         }
@@ -107,7 +99,6 @@ public static class PathFinder
                 return false;
             }
         }
-        return false;
     }
 
     private static bool isLShape(Tile[,] grid, Vector2Int a, Vector2Int b)
@@ -223,99 +214,48 @@ public static class PathFinder
 
     private static bool isZShape(Tile[,] grid, Vector2Int a, Vector2Int b)
     {
-        if (a.x < b.x && a.y < b.y)
+        // First try horizontal to vertical (H-V-H)
+        for (int midX = 1; midX < grid.GetLength(0) - 1; midX++)
         {
-            for (int x = a.x + 1; x <= b.x - 1; x++)
+            if (midX == a.x || midX == b.x)
+                continue;
+
+            Vector2Int mid1 = new Vector2Int(midX, a.y);
+            Vector2Int mid2 = new Vector2Int(midX, b.y);
+
+            if (
+                isEmpty(grid, mid1)
+                && isEmpty(grid, mid2)
+                && isStraightMove(grid, a, mid1)
+                && isStraightMove(grid, mid1, mid2)
+                && isStraightMove(grid, mid2, b)
+            )
             {
-                if (
-                    isLShape(grid, new Vector2Int(x, a.y), b)
-                    && isStraightMove(grid, a, new Vector2Int(x, a.y))
-                )
-                {
-                    return true;
-                }
-            }
-            for (int y = a.y + 1; y <= b.y - 1; y++)
-            {
-                if (
-                    isLShape(grid, new Vector2Int(a.x, y), b)
-                    && isStraightMove(grid, a, new Vector2Int(a.x, y))
-                )
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-        else if (a.x > b.x && a.y > b.y)
-        {
-            for (int x = a.x - 1; x >= b.x + 1; x--)
-            {
-                if (
-                    isLShape(grid, new Vector2Int(x, a.y), b)
-                    && isStraightMove(grid, a, new Vector2Int(x, a.y))
-                )
-                {
-                    return true;
-                }
-            }
-            for (int y = a.y - 1; y >= b.y + 1; y--)
-            {
-                if (
-                    isLShape(grid, new Vector2Int(a.x, y), b)
-                    && isStraightMove(grid, a, new Vector2Int(a.x, y))
-                )
-                {
-                    return true;
-                }
+                return true;
             }
         }
-        else if (a.x > b.x && a.y < b.y)
+
+        // Then try vertical to horizontal (V-H-V)
+        for (int midY = 1; midY < grid.GetLength(1) - 1; midY++)
         {
-            for (int x = a.x - 1; x >= b.x + 1; x--)
+            if (midY == a.y || midY == b.y)
+                continue;
+
+            Vector2Int mid1 = new Vector2Int(a.x, midY);
+            Vector2Int mid2 = new Vector2Int(b.x, midY);
+
+            if (
+                isEmpty(grid, mid1)
+                && isEmpty(grid, mid2)
+                && isStraightMove(grid, a, mid1)
+                && isStraightMove(grid, mid1, mid2)
+                && isStraightMove(grid, mid2, b)
+            )
             {
-                if (
-                    isLShape(grid, new Vector2Int(x, a.y), b)
-                    && isStraightMove(grid, a, new Vector2Int(x, a.y))
-                )
-                {
-                    return true;
-                }
-            }
-            for (int y = a.y + 1; y <= b.y - 1; y++)
-            {
-                if (
-                    isLShape(grid, new Vector2Int(a.x, y), b)
-                    && isStraightMove(grid, a, new Vector2Int(a.x, y))
-                )
-                {
-                    return true;
-                }
+                return true;
             }
         }
-        else if (a.x < b.x && a.y > b.y)
-        {
-            for (int y = a.y - 1; y >= b.y + 1; y--)
-            {
-                if (
-                    isLShape(grid, new Vector2Int(a.x, y), b)
-                    && isStraightMove(grid, a, new Vector2Int(a.x, y))
-                )
-                {
-                    return true;
-                }
-            }
-            for (int x = a.x + 1; x <= b.x - 1; x++)
-            {
-                if (
-                    isLShape(grid, new Vector2Int(x, a.y), b)
-                    && isStraightMove(grid, a, new Vector2Int(x, a.y))
-                )
-                {
-                    return true;
-                }
-            }
-        }
+
         return false;
     }
 

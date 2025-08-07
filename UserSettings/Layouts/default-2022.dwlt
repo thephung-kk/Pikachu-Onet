@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1638.4
     height: 932.8
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -39,9 +39,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1371.2
+    x: 1339.2
     y: 0
-    width: 267.20007
+    width: 299.20007
     height: 882.8
   m_MinSize: {x: 101, y: 121}
   m_MaxSize: {x: 4001, y: 4021}
@@ -67,7 +67,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 344.80005
+    width: 350.40002
     height: 508
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
@@ -93,7 +93,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 508
-    width: 344.80005
+    width: 350.40002
     height: 374.8
   m_MinSize: {x: 232, y: 271}
   m_MaxSize: {x: 10002, y: 10021}
@@ -121,7 +121,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 764
     y: 0
-    width: 344.80005
+    width: 350.40002
     height: 882.8
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 50
+  controlID: 26
   draggingID: 0
 --- !u!114 &9
 MonoBehaviour:
@@ -268,9 +268,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1108.8
+    x: 1114.4
     y: 0
-    width: 262.3999
+    width: 224.79993
     height: 882.8
   m_MinSize: {x: 277, y: 71}
   m_MaxSize: {x: 4002, y: 4021}
@@ -353,9 +353,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1371.2001
+    x: 1339.2001
     y: 73.6
-    width: 266.20007
+    width: 298.20007
     height: 861.8
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -477,7 +477,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 764
     y: 73.6
-    width: 342.80005
+    width: 348.40002
     height: 487
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -492,9 +492,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 18fbfffff0600000fe600000
+      m_SelectedIDs: f0600000
+      m_LastClickedID: 24816
+      m_ExpandedIDs: 18fbfffffe600000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -538,9 +538,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1108.8
+    x: 1114.4
     y: 73.6
-    width: 260.3999
+    width: 222.79993
     height: 861.8
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -587,7 +587,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 764
     y: 581.60004
-    width: 342.80005
+    width: 348.40002
     height: 353.8
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -625,9 +625,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 10620000
-    m_LastClickedID: 25104
-    m_ExpandedIDs: 000000004a6100004c6100004e6100000c620000
+    m_SelectedIDs: 0e620000
+    m_LastClickedID: 25102
+    m_ExpandedIDs: 000000004a6100004c6100004e610000086200000c620000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
