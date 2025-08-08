@@ -24,20 +24,34 @@ public class GridSystem : MonoBehaviour
     [SerializeField]
     public GridManager gridManager; // Reference to the click handler
     public Tile[,] grid;
+    public int currentLevel;
+    public LevelManager levelManager;
 
     private void Start()
+    {
+        OnServerInitialized();
+    }
+
+    private void OnServerInitialized()
     {
         totalTiles = (width - 2) * (height - 2);
         CalculateOriginPosition();
         CreateGrid();
+
+        if (levelManager != null)
+        {
+            currentLevel = levelManager.currentLevel;
+        }
+        else
+        {
+            currentLevel = 1; // Default level if no LevelManager assigned
+        }
     }
 
     private void Update()
     {
-        if (!PathFindingUtils.HasAnyValidMove(grid))
-        {
-            PathFindingUtils.ShuffleTiles(grid);
-        }
+        CollapseDirection dir = GridCollapse.GetCollapseDirectionByLevel(currentLevel);
+        GridCollapse.Collapse(grid, dir);
     }
 
     private void CalculateOriginPosition()
@@ -73,25 +87,58 @@ public class GridSystem : MonoBehaviour
         List<Sprite> availableSprites = new List<Sprite>(allSprites);
         List<Sprite> selectedSprites = new List<Sprite>();
 
-        if (availableSprites.Count < numberOfSprites)
+        if (numberOfSprites > allSprites.Length)
         {
             numberOfSprites = allSprites.Length;
+        }
+        else if (numberOfSprites < 24)
+        {
+            numberOfSprites = 24;
         }
 
         for (int i = 0; i < numberOfSprites; i++)
         {
             int randIndex = Random.Range(0, availableSprites.Count);
             selectedSprites.Add(availableSprites[randIndex]);
-            availableSprites.RemoveAt(randIndex); // Ensure uniqueness
+            availableSprites.RemoveAt(randIndex);
         }
 
         // Generate totalPairs using randomly selected sprites (duplicates allowed)
         List<Sprite> spritePairs = new List<Sprite>();
         for (int i = 0; i < totalPairs; i++)
         {
-            Sprite chosen = selectedSprites[Random.Range(0, selectedSprites.Count)];
-            spritePairs.Add(chosen);
-            spritePairs.Add(chosen);
+            if (selectedSprites.Count < 36) // Case: 24 <= count < 36
+            {
+                // Triplicate each sprite (each sprite appears 3 times for pairing)
+                List<Sprite> expanded = new List<Sprite>();
+                foreach (var sprite in selectedSprites)
+                {
+                    expanded.Add(sprite);
+                    expanded.Add(sprite);
+                    expanded.Add(sprite);
+                }
+                selectedSprites = expanded;
+            }
+            else // Case: >= 36
+            {
+                // Duplicate each sprite (each sprite appears 2 times for pairing)
+                List<Sprite> expanded = new List<Sprite>();
+                foreach (var sprite in selectedSprites)
+                {
+                    expanded.Add(sprite);
+                    expanded.Add(sprite);
+                }
+                selectedSprites = expanded;
+            }
+
+            // Now randomly take pairs until grid is filled
+            while (spritePairs.Count < totalTiles)
+            {
+                Sprite chosen = selectedSprites[Random.Range(0, selectedSprites.Count)];
+                spritePairs.Add(chosen);
+                spritePairs.Add(chosen);
+                selectedSprites.Remove(chosen);
+            }
         }
 
         // Shuffle the pairs

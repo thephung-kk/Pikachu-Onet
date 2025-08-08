@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    [SerializeField]
+    private LevelManager levelManager;
     private Tile firstSelected;
     private Tile secondSelected;
     public Tile[,] grid;
@@ -27,10 +29,13 @@ public class GridManager : MonoBehaviour
 
             if (PathFinder.CanConnect(grid, firstSelected, secondSelected))
             {
+                firstSelected.SetHighlight(false);
+                secondSelected.SetHighlight(false);
                 firstSelected.Hide();
                 secondSelected.Hide();
                 firstSelected = null;
                 secondSelected = null;
+                HandlePostMatchState();
             }
             else
             {
@@ -59,5 +64,38 @@ public class GridManager : MonoBehaviour
             firstSelected = null;
             secondSelected = null;
         }
+    }
+
+    private void HandlePostMatchState()
+    {
+        if (!PathFindingUtils.HasAnyValidMove(grid))
+        {
+            ShuffleGrid();
+        }
+
+        if (IsAllTilesHidden())
+        {
+            if (levelManager != null)
+            {
+                levelManager.CompleteLevel();
+            }
+        }
+    }
+
+    private bool IsAllTilesHidden()
+    {
+        int width = grid.GetLength(0);
+        int height = grid.GetLength(1);
+
+        for (int x = 1; x < width - 1; x++)
+        {
+            for (int y = 1; y < height - 1; y++)
+            {
+                Tile tile = grid[x, y];
+                if (tile != null && tile.gameObject.activeSelf)
+                    return false;
+            }
+        }
+        return true;
     }
 }
