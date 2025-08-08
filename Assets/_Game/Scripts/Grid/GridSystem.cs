@@ -50,7 +50,9 @@ public class GridSystem : MonoBehaviour
 
     private void Update()
     {
+        currentLevel = levelManager.currentLevel;
         CollapseDirection dir = GridCollapse.GetCollapseDirectionByLevel(currentLevel);
+        Debug.Log("Collapse direction: " + dir + " currentLevel: " + currentLevel);
         GridCollapse.Collapse(grid, dir);
     }
 

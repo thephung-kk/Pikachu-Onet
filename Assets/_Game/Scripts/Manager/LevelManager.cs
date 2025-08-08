@@ -6,17 +6,23 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     public int currentLevel;
-
     public int spriteCount;
+
+    [SerializeField]
+    private BackgroundManager backgroundManager;
 
     void Start()
     {
-        // // Load saved level (default = 1)
+        // Load saved level (default = 1)
         currentLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
         // Setup sprite count based on level
         spriteCount = GetSpriteCountForLevel(currentLevel);
-
-        Debug.Log("Loaded Level: " + currentLevel + " | SpriteCount: " + spriteCount);
+        // Set background based on level
+        if (backgroundManager != null)
+        {
+            backgroundManager.SetBackground(currentLevel.ToString());
+            Debug.Log("Loaded");
+        }
     }
 
     public void CompleteLevel()
