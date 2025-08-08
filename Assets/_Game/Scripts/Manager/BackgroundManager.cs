@@ -40,4 +40,6 @@ public class BackgroundManager : MonoBehaviour
             1f
         );
     }
+
+    // Test
 }
